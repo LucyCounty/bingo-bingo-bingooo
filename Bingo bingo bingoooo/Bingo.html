@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Papel.css">
+    <title>Bingo</title>
+</head>
+<body>
+    
+    <header>
+        <h1>Bingo</h1>
+    </header>
+
+    <main>
+        <section id="areaCartelas">
+            <div id="headerCartelas">
+                <h3>Cartela</h3>
+                <button onclick="inscreverJogador()">Gerar Cartela</button>
+                <button>Reiniciar Jogo</button>
+            </div>
+
+            <div id="bodyCartelas"></div>
+        </section>
+
+        <section id="areaBingo">
+            <div id="headerNumeros">
+                <button onclick="jogar()">Jogar</button>
+            </div>
+
+            <div id="bodyNumeros"></div>
+        </section>
+    </main>
+
+    <footer>
+        <h4>Developed by Luciano</h4>
+    </footer>
+
+    <script src="Marcacao.js"></script>
+</body>
+</html>
