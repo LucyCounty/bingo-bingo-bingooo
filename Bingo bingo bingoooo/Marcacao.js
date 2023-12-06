@@ -1,5 +1,8 @@
 var jogadores = []
 var numerosSorteados = [];
+var intervalo;
+var vencedorEncontrado = false;
+var jogoIniciado = false;
 
 function desenharCartela(jogador){
 
@@ -73,6 +76,12 @@ function gerarCartela(){
 }
 
 function inscreverJogador(){
+
+    if(jogoIniciado == true){
+        alert('Não é possivel criar uma nova cartela com o jogo iniciado.');
+        return;
+    }
+
     const nome = prompt('digite o nome do jogador: ');
 
     if(nome.length < 1){
@@ -103,10 +112,13 @@ function jogar(){
         return;
     }
 
-    const intervalo = setInterval(function(){
+    jogoIniciado = true;
 
+    intervalo = setInterval(function(){
+
+        var aleatorio;
         while(true){
-            var aleatorio = Math.floor(Math.random() * 76);
+            aleatorio = Math.floor(Math.random() * 75);
             if(!numerosSorteados.includes(aleatorio)){
                 numerosSorteados.push(aleatorio);
                 break;
@@ -121,7 +133,15 @@ function jogar(){
         bodyNumeros.appendChild(span);
 
         console.log(numerosSorteados);
-    }, 1000)
+
+        confirmarJogo(aleatorio);
+
+        if (numerosSorteados.length >= 75) {
+            console.log("Sorteio Finalizado!");
+            clearInterval(intervalo);
+        }
+
+    }, 100)
 }
 
 function confirmarJogo(numero){
@@ -129,7 +149,28 @@ function confirmarJogo(numero){
 
     for(var i = 0; i < numerosCartelas.length; i++){
         if(numerosCartelas[i].innerText == numero){
-            numerosCartelas[i].style.backgroundColor = 'blue';
+            numerosCartelas[i].style.backgroundColor = 'lightblue';
         }
     }
+}
+
+function reiniciarJogo() {
+
+    numerosSorteados = [];
+
+    const divCartelas = document.getElementById('bodyCartelas');
+    divCartelas.innerHTML = '';
+
+    const bodyNumeros = document.getElementById('bodyNumeros');
+    bodyNumeros.innerHTML = '';
+
+    jogadores = [];
+
+    clearInterval(intervalo);
+
+    alert('Jogo reiniciado!');
+
+    jogoIniciado = false;
+
+    vencedorEncontrado = false;
 }
